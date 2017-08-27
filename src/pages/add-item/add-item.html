@@ -1,0 +1,66 @@
+<!--
+  Generated template for the AddItemPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+	<ion-title>Add Item - {{title}}</ion-title>
+	<ion-buttons end>
+		<button ion-button icon-only (click)="close()"><ion-icon name="close"></ion-icon></button>
+	</ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-list>
+		<ion-item>
+			<ion-label floating>Title</ion-label>
+			<ion-input type="text" [(ngModel)]="title"></ion-input>
+		</ion-item>
+
+		<ion-item  >
+			<ion-label floating>Description</ion-label>
+			<ion-textarea rows="7" type="text" [(ngModel)]="description"></ion-textarea>
+		</ion-item>
+
+		<!-- <ion-item  >
+			<ion-label floating>Category</ion-label>
+			<ion-input type="text" [(ngModel)]="category"></ion-input>
+		</ion-item> -->
+
+	</ion-list>
+
+	<ion-list>
+		<ion-item>
+			<ion-label>Category</ion-label>
+			<ion-select [(ngModel)]="selectedCategory">
+				<div class="categoryContainer">
+					<ion-option *ngFor="let category of categories"
+						[class.selected]="category === selectedCategory" (click)="onSelect(category.name)">{{category.name}}
+						<!-- <input *ngIf="selectedCategory" [(ngModel)]="category.name"> -->
+					</ion-option>
+				</div>
+
+				<!-- <ion-option value="Inspiration">Inspiration</ion-option>
+				<ion-option value="Personal">Personal</ion-option>
+				<ion-option value="Notes">Notes</ion-option>
+				<ion-option value="Shopping List">Shopping List</ion-option>
+				<ion-option value="To-do">To-do</ion-option> -->
+			</ion-select> -->
+			
+		</ion-item>
+	</ion-list>
+
+	<ion-buttons end>
+		<button ion-button color="light" (click)="close()">Cancel</button>
+		<button end ion-button color="secondary" (click)="saveItem()">Save</button>
+	</ion-buttons>
+
+
+</ion-content>

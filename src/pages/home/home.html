@@ -1,14 +1,47 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+	  <!-- <button ion-button right menuButton (click)="presentPopover(ev)">
+		  <ion-icon name="funnel"></ion-icon>
+			<ion-list>
+				<ion-item *ngFor="let item of items" (click)="viewItem(item)" 
+				on-swipe="released(item)">
+				<!- <ion-icon [name]="category.icon" item-left></ion-icon> -->
+				<!-- {{item.title}}</ion-item>
+			</ion-list>
+	  </button> -->
+		<ion-buttons end>
+			<button (click)="presentPopover($event)">
+				<ion-icon name="funnel"></ion-icon>
+			</button>
+		</ion-buttons>
+		<ion-title>
+			Gewgle Keep {{' : ' + categoryPlaceholder}}
+		</ion-title>
+	<!-- <ion-buttons end>
+		<button ion-button icon-only (click)="addItem()"><ion-icon name="add-circle"></ion-icon></button>
+	</ion-buttons> -->
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
+  <!-- The world is your oyster.
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  </p> -->
+	<ion-list>
+		<ion-item *ngFor="let item of items" (click)="viewItem(item)" 
+		on-swipe="released(item)">
+		<!-- <ion8-icon [name]="category.icon" item-left></ion-icon> -->
+		{{item.title}}</ion-item>
+	</ion-list>
+
+	<!-- (click)="viewItem(item)" -->
+	<div class="spanComment">
+		<span class="emptyMessageText">{{spanContent}}</span>
+	</div>
+
+		<ion-fab right bottom>
+			<button ion-fab color="secondary" (click)="addItem()"><ion-icon name="add"></ion-icon></button>
+		</ion-fab>
+
 </ion-content>

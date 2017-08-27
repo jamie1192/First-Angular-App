@@ -6,25 +6,42 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { MyPopOverPage } from '../pages/my-pop-over/my-pop-over';
+import { AddItemPage } from '../pages/add-item/add-item';
+import { ItemDetailPage } from '../pages/item-detail/item-detail';
+import { DataProvider } from '../providers/data/data';
+import { IonicStorageModule } from '@ionic/storage';
+import { LongPressModule } from 'ionic-long-press';
 
+ 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+	HomePage,
+	AddItemPage,
+	ItemDetailPage, 
+	MyPopOverPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+	IonicModule.forRoot(MyApp),
+	IonicStorageModule.forRoot(),
+	LongPressModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+	HomePage,
+	AddItemPage,
+	ItemDetailPage,
+	MyPopOverPage
+	
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    DataProvider
   ]
 })
 export class AppModule {}

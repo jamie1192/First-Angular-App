@@ -1,3 +1,29 @@
 page-home {
 
+	background: light;
+
+	ion-item:hover {
+		background-color: #C9CACB !important;
+	  }
+	
+	  .emptyMessage{
+		  height: 100%;
+		  width: 100%;
+		  z-index: 100;
+	  }
+
+	  .emptyMessageText {
+		//   left: 0;
+		  right: 0;
+		  top: 0;
+		  bottom: 0;
+		  color: grey;
+	  }
+
+	  .spanComment {
+		  width: 100%;
+		  text-align: center;
+	  }
+	
+	  
 }
