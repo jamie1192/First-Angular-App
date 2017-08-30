@@ -70,6 +70,10 @@ export class HomePage {
 			else{
 				this.spanContent = 'Nothing here yet!';
 			}
+			if (this.items.length == 0) {
+				
+				this.spanContent = 'Nothing here yet!';
+			}
 			// console.log(this.items.length+' length');
 		})
 	}
@@ -257,6 +261,7 @@ export class HomePage {
 
 		//save edited items again
 		this.dataService.save(this.items);
+		
 
 		// delete this.items[0][item.title];
 		console.log(this.items);
