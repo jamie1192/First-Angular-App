@@ -93,28 +93,32 @@ export class HomePage {
 				this.filterArr = this.items;
 				// this.filterArr = JSON.parse(todos);
 				this.spanContent = null;
-			}
-			else{
-				this.spanContent = 'Nothing here yet!';
-			}
-			// console.log(this.items.length+' length');
-		})
-		this.items.push(item);
-		this.dataService.save(this.items);
-		this.spanContent = null;
-
-		//paste
-		this.dataService.getData().then((todos) => {
-			
-			if(todos){
-				this.items = JSON.parse(todos);
+				this.items.push(item);
+				this.dataService.save(this.items);
 				this.spanContent = null;
 			}
 			else{
 				this.spanContent = 'Nothing here yet!';
+				this.items.push(item);
+				this.dataService.save(this.items);
+				this.spanContent = null;
 			}
 			// console.log(this.items.length+' length');
 		})
+		
+
+		//paste
+		// this.dataService.getData().then((todos) => {
+			
+		// 	if(todos){
+		// 		this.items = JSON.parse(todos);
+		// 		this.spanContent = null;
+		// 	}
+		// 	else{
+		// 		this.spanContent = 'Nothing here yet!';
+		// 	}
+		// 	// console.log(this.items.length+' length');
+		// })
 	}
 
 	viewItem(item) {
