@@ -102,6 +102,19 @@ export class HomePage {
 		this.items.push(item);
 		this.dataService.save(this.items);
 		this.spanContent = null;
+
+		//paste
+		this.dataService.getData().then((todos) => {
+			
+			if(todos){
+				this.items = JSON.parse(todos);
+				this.spanContent = null;
+			}
+			else{
+				this.spanContent = 'Nothing here yet!';
+			}
+			// console.log(this.items.length+' length');
+		})
 	}
 
 	viewItem(item) {
@@ -252,11 +265,11 @@ export class HomePage {
 		for(var i = 0; i < this.items.length; i++) {
 			var obj = this.items[i];
 			console.log(this.selectedCategory.name + 'items2');
-				if([this.selectedCategory.name].indexOf(obj.category) !== -1) {
-					this.items.splice(i, 1);
-					// i--; ?
-					console.log(this.items);
-				}
+			if([this.selectedCategory.name].indexOf(obj.category) !== -1) {
+				this.items.splice(i, 1);
+				// i--; ?
+				console.log(this.items);
 			}
+		}
 	}
 }
