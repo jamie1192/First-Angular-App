@@ -3,11 +3,6 @@ import { ToastController } from 'ionic-angular';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Category } from '../../app/category';
 
-// const CATEGORIES: Category[] = [
-// 	{ icon: 'bulb', name: 'Inspiration' },
-// 	{ icon: '123213', name: 'To-do' },
-// 	{ icon: 'zxcxz', name: 'Something' }
-// ]
 /**
  * Generated class for the AddItemPage page.
  *
@@ -16,11 +11,12 @@ import { Category } from '../../app/category';
  */
 
 const CATEGORIES: Category[] = [
+	// { icon: 'paper', name: 'All' },
 	{ icon: 'bulb', name: 'Inspiration' },
 	{ icon: 'book', name: 'Personal' },
 	{ icon: 'school', name: 'School' },
 	{ icon: 'cart', name: 'Shopping' },
-	{ icon: 'done-all', name: 'To-do' },
+	{ icon: 'done-all', name: "To-do" },
 	{ icon: 'help', name: 'Other' }
 ]
 
@@ -34,8 +30,10 @@ export class AddItemPage {
 
 	title;
 	description;
+	categIcon;
 	categories = CATEGORIES;
 	selectedCategory: Category;
+	selectedCategoryIcon: Category;
 
 constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, 
 		private toastCtrl: ToastController) {
@@ -44,13 +42,21 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public v
 
 saveItem() {
 
+	// var trimmedIcon = this.selectedCategory.icon.trim();
+	var trimmedIcon = this.selectedCategoryIcon;
+
 
 	console.log(this.title+' title length');
 	let newItem = {
 		title: this.title,
 		description: this.description,
-		category: this.selectedCategory
+		category: this.selectedCategory,
+		categIcon: this.selectedCategoryIcon
 	};
+
+
+	
+	console.log(this.selectedCategoryIcon + ' Icon after');
 
 	// var titleTrim = this.title;
 	// console.log(this.title.count+'new count');
@@ -64,7 +70,7 @@ saveItem() {
 	}
 
 
-	if(this.title.trim() == 0){
+	else if(this.title.trim() == 0){
 		console.log('trim');
 		let toast = this.toastCtrl.create({
 			message: 'Please enter a title!',
@@ -101,7 +107,14 @@ close() {
 
 onSelect(category: Category): void {
 	this.selectedCategory = category;
-	console.log('selected: ' + this.selectedCategory);
+	// this.selectedCategoryIcon = icon;
+	console.log(this.selectedCategory + ' selected');
+
+}
+
+pressedItem(icon: Category): void {
+	this.selectedCategoryIcon = icon;
+	console.log(this.selectedCategoryIcon + ' icon name');
 }
 
   ionViewDidLoad() {

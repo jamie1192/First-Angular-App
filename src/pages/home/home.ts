@@ -3,7 +3,6 @@ import { ModalController, NavController } from 'ionic-angular';
 import { AddItemPage } from '../add-item/add-item';
 import { ItemDetailPage } from '../item-detail/item-detail';
 import { DataProvider } from '../../providers/data/data';
-import { LongPressModule } from 'ionic-long-press';
 import { ToastController } from 'ionic-angular';
 
 import { PopoverController } from 'ionic-angular';
@@ -206,17 +205,6 @@ export class HomePage {
 	markDone() {
 	//   this.items
 	}
-
-	// onSelect(category) {
-	// 	for(var i = 0; i < this.items.length; i++) {
-	// 		var obj = this.items[i];
-		
-	// 		if([category.title].indexOf(obj.title) !== -1) {
-	// 			this.items.splice(i, 1);
-	// 			// i--; ?
-	// 		}
-	// 	}
-	// }
 
 	onhold() {
 		console.log('list item held');

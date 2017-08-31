@@ -21,20 +21,20 @@ const CATEGORIES: Category[] = [
 
 @IonicPage()
 @Component({
-  selector: 'page-my-pop-over',
-  templateUrl: 'my-pop-over.html',
+	selector: 'page-my-pop-over',
+	templateUrl: 'my-pop-over.html',
 })
 export class MyPopOverPage {
 
 	categories = CATEGORIES;
 	selectedCategory;
 
-  constructor(private viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams) {
-  }
+	constructor(private viewCtrl: ViewController, public navCtrl: NavController, public navParams: NavParams) {
+	}
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad MyPopOverPage');
-  }
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad MyPopOverPage');
+	}
 
 	setSelectedTitle(selectedItem: Category): void {
 		this.selectedCategory = selectedItem;
