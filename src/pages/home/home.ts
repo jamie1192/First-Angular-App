@@ -154,18 +154,26 @@ export class HomePage {
 								console.log(this.items + ' for');
 								var obj = this.items[i];
 								
-								console.log(obj.category.trim()+ ' obj cat');
+								// console.log(obj.category.trim()+ ' obj cat');
 								// if([this.selectedCategory].indexOf(obj.category.trim()) !== -1) {
-								
+								if(obj.category == undefined) {
+									this.spanContent = 'Nothing here yet!';
+								}
+
 								// //this wors but cuts from this.items
-								if(obj.category.trim() !== this.selectedCategory) {	
+								else if(obj.category.trim() !== this.selectedCategory) {	
 									this.items.splice(i, 1);
 									console.log(this.items + ' inside');
 									i--;
+									if(this.items.length == 0) {
+										this.spanContent = 'Nothing here yet!';
+									}
+
 									// console.log(this.filterArr + ' filter count');
 									// this.items = this.filterArr;
 									// i--; ?
 								}
+
 								// this.items = this.items.filter( function( el ) {
 								// 	return this.items.includes( this.selectedCategory );
 								//   } );
@@ -173,6 +181,7 @@ export class HomePage {
 								//   console.log(el.category  + 'el cat');
 							}
 						}
+
 						else{
 							this.spanContent = 'Nothing here yet!';
 						}
@@ -183,11 +192,12 @@ export class HomePage {
 				}
 				else {
 					this.dataService.getData().then((todos) => {
-						console.log(this.items.length+ ' length');
+						
 						if(todos){
 							this.items = JSON.parse(todos);
 							this.filterArr = this.items;
 							// this.filterArr = JSON.parse(todos);
+							console.log(this.items.length+ ' length');
 							this.spanContent = null;
 						}
 						else{
