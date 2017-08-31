@@ -129,11 +129,6 @@ onSelect(category: Category): void {
 
 }
 
-pressedItem(icon: Category): void {
-	this.selectedCategoryIcon = icon;
-	
-}
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad AddItemPage');
   }
