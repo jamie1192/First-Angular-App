@@ -32,7 +32,7 @@
 	<ion-list>
 		<ion-item *ngFor="let item of items" (click)="viewItem(item)" 
 		on-swipe="released(item)">
-		<!-- <ion-icon [name]="item.categIcon" item-left></ion-icon> -->
+		<ion-icon [name]="item.categIcon" item-left></ion-icon>
 		{{item.title}}</ion-item>
 	</ion-list>
 

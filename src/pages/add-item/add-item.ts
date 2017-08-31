@@ -33,7 +33,7 @@ export class AddItemPage {
 	categIcon;
 	categories = CATEGORIES;
 	selectedCategory: Category;
-	selectedCategoryIcon: Category;
+	selectedCategoryIcon;
 
 constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, 
 		private toastCtrl: ToastController) {
@@ -43,8 +43,22 @@ constructor(public navCtrl: NavController, public navParams: NavParams, public v
 saveItem() {
 
 	// var trimmedIcon = this.selectedCategory.icon.trim();
-	var trimmedIcon = this.selectedCategoryIcon;
+	// var trimmedIcon = this.selectedCategoryIcon;
 
+	// while(obj.name != undefined) {
+		for(var i=0; this.selectedCategoryIcon == undefined; i++) {
+			var obj = CATEGORIES[i];
+			
+			var nameString = this.selectedCategory.toString();
+			console.log('slot: ' + i);
+			console.log(obj.icon + ' category slot ' + i);
+			console.log(nameString + ' namestring');
+			console.log(obj.name + ' obj.name');
+			if (obj.name == nameString) {
+				this.selectedCategoryIcon = obj.icon;
+			}	
+		}
+	
 
 	console.log(this.title+' title length');
 	let newItem = {
@@ -56,7 +70,7 @@ saveItem() {
 
 
 	
-	console.log(this.selectedCategoryIcon + ' Icon after');
+	console.log(this.categIcon + ' Icon after save');
 
 	// var titleTrim = this.title;
 	// console.log(this.title.count+'new count');
@@ -106,15 +120,18 @@ close() {
 }
 
 onSelect(category: Category): void {
+	
+	console.log(this.selectedCategory + ' selected');
 	this.selectedCategory = category;
 	// this.selectedCategoryIcon = icon;
-	console.log(this.selectedCategory + ' selected');
+	
+	// console.log(this.selectedCategoryIcon + ' icon name');
 
 }
 
 pressedItem(icon: Category): void {
 	this.selectedCategoryIcon = icon;
-	console.log(this.selectedCategoryIcon + ' icon name');
+	
 }
 
   ionViewDidLoad() {

@@ -73,6 +73,9 @@ export class HomePage {
 				
 				this.spanContent = 'Nothing here yet!';
 			}
+			// else if (this.items.length != 0) {
+			// 	this.spanContent = null;
+			// }
 			// console.log(this.items.length+' length');
 		})
 	}

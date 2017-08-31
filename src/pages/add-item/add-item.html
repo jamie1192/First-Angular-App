@@ -42,7 +42,7 @@
 			<ion-select [(ngModel)]="selectedCategory">
 				<div class="categoryContainer">
 					<ion-option *ngFor="let category of categories"
-						[class.selected]="category === selectedCategory" (click)="onSelect(category.name)" (pressed)="pressedItem(category.icon)">{{category.name}}</ion-option>
+						[class.selected]="category === selectedCategory" (click)="onSelect(category.name)" (click)="pressedItem(category.icon)">{{category.name}}</ion-option>
 				</div>
 
 				<!-- <ion-option value="Inspiration">Inspiration</ion-option>
