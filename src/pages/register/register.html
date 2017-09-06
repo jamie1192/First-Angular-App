@@ -7,12 +7,35 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>register</ion-title>
+    <ion-title>Register</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+	<ion-list>
+		<!-- Email -->
+		<ion-item>
+			<ion-label floating>Email</ion-label>
+			<ion-input type="email" [(ngModel)]="registerData.email"></ion-input>
+		</ion-item>
+
+		<!-- Password -->
+		<ion-item>
+			<ion-label floating>Password</ion-label>
+			<ion-input type="password" [(ngModel)]="registerData.password"></ion-input>
+		</ion-item>
+
+		<!-- Confirm password -->
+		<ion-item>
+			<ion-label floating>Confirm Password</ion-label>
+			<ion-input type="password" [(ngModel)]="registerData.passwordRetyped"></ion-input>
+		</ion-item>
+	</ion-list>
+
+	<button full ion-button (click)="register()">Register</button>
+
 
 </ion-content>

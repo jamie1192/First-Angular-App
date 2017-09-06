@@ -9,6 +9,9 @@ import { Category } from '../app/category';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 
+import { AngularFireAuth } from 'angularfire2/auth';
+
+
 const CATEGORIES: Category[] = [
 	{ icon: 'bulb', name: 'Inspiration' },
 	{ icon: 'book', name: 'Personal' },
@@ -17,6 +20,16 @@ const CATEGORIES: Category[] = [
 	{ icon: 'done-all', name: 'To-do' },
 	{ icon: 'help', name: 'Other' }
 ]
+
+// const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+// 	if (!user) {
+// 		this.rootPage = 'login';
+// 		unsubscribe();
+// 	} else {
+// 		this.rootPage = HomePage;
+// 		unsubscribe();
+// 	}
+// });
 
 // <ion-option value="Personal">Personal</ion-option>
 // <ion-option value="Notes">Notes</ion-option>
@@ -35,14 +48,33 @@ export class MyApp {
 
 	selectedCategory;
 
-  	rootPage:any = LoginPage;
+	  rootPage:any; //= LoginPage;
+	  
 
-  	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public dataService: DataProvider) {
-    	platform.ready().then(() => {
+	  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public dataService: DataProvider,
+				private afAuth: AngularFireAuth) {
+			
+			this.afAuth.authState.subscribe(auth => {
+				if(!auth)
+					this.rootPage = LoginPage;
+				else
+					this.rootPage = HomePage;
+			});
+		
+			platform.ready().then(() => {
 			// Okay, so the platform is ready and our plugins are available.
 			// Here you can do any higher level native things you might need.
 			statusBar.styleDefault();
 			splashScreen.hide();
+
+			// firebase.initializeApp({
+			// 	apiKey: "AIzaSyCp0xH3jphTGHAWVCnO9N9YDlMT4eS52RU",
+			// 	authDomain: "crossappstasker.firebaseapp.com",
+			// 	databaseURL: "https://crossappstasker.firebaseio.com",
+			// 	projectId: "crossappstasker",
+			// 	storageBucket: "crossappstasker.appspot.com",
+			// 	messagingSenderId: "674430010447"
+			// })
 		});
 		// this.dataService.getData().then((todos) => {
 			
