@@ -9,6 +9,8 @@ import { PopoverController } from 'ionic-angular';
 import { MyPopOverPage } from '../my-pop-over/my-pop-over';
 import { Category } from '../../app/category';
 
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
 const CATEGORIES: Category[] = [
 	{ icon: 'paper', name: 'All' },
 	{ icon: 'bulb', name: 'Inspiration' },
@@ -26,6 +28,8 @@ const CATEGORIES: Category[] = [
 
 export class HomePage {
 
+	dbItems: FirebaseListObservable<any[]>;
+
 	public items = [];	
 	public backupArr = [];
 	public filterArr = [];
@@ -39,7 +43,9 @@ export class HomePage {
 	categoryPlaceholder = 'All';
 
 	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: DataProvider, 
-				private toastCtrl: ToastController, public popoverCtrl: PopoverController) {
+				private toastCtrl: ToastController, public popoverCtrl: PopoverController, afDB: AngularFireDatabase) {
+
+		// this.dbItems = afDB.list('/cuisines');
 
 		this.dataService.getData().then((todos) => {
 

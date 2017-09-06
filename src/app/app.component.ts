@@ -6,6 +6,8 @@ import { DataProvider } from '../providers/data/data';
 
 import { HomePage } from '../pages/home/home';
 import { Category } from '../app/category';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 
 const CATEGORIES: Category[] = [
 	{ icon: 'bulb', name: 'Inspiration' },
@@ -33,7 +35,7 @@ export class MyApp {
 
 	selectedCategory;
 
-  	rootPage:any = HomePage;
+  	rootPage:any = LoginPage;
 
   	constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public dataService: DataProvider) {
     	platform.ready().then(() => {
