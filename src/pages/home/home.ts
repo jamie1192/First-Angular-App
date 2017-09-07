@@ -10,6 +10,7 @@ import { MyPopOverPage } from '../my-pop-over/my-pop-over';
 import { Category } from '../../app/category';
 
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 const CATEGORIES: Category[] = [
 	{ icon: 'paper', name: 'All' },
@@ -42,8 +43,15 @@ export class HomePage {
 	selectedCategory;
 	categoryPlaceholder = 'All';
 
-	constructor(public navCtrl: NavController, public modalCtrl: ModalController, public dataService: DataProvider, 
-				private toastCtrl: ToastController, public popoverCtrl: PopoverController, afDB: AngularFireDatabase) {
+	constructor(
+		public navCtrl: NavController, 
+		public modalCtrl: ModalController, 
+		public dataService: DataProvider, 
+		private toastCtrl: ToastController, 
+		public popoverCtrl: PopoverController, 
+		private afDB: AngularFireDatabase,
+		private auth: AngularFireAuth
+	){
 
 		// this.dbItems = afDB.list('/cuisines');
 
@@ -287,5 +295,15 @@ export class HomePage {
 				console.log(this.items);
 			}
 		}
+	}
+
+	logout() {
+		this.auth.auth.signOut();
+		let toast = this.toastCtrl.create({
+			message: 'You have been logged out!',
+			duration: 3000,
+			position: 'bottom'
+		});
+		toast.present();
 	}
 }
