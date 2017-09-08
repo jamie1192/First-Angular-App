@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { RegisterPage } from '../../pages/register/register';
 
+import * as firebase from 'firebase/app';
+
 import { AngularFireAuth } from 'angularfire2/auth';
 
 /**
@@ -35,6 +37,12 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
+  }
+
+  signInWithFacebook() {
+    this.afAuth.auth
+      .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+      .then(res => console.log(res));
   }
 
   login() {

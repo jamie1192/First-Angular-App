@@ -59,22 +59,23 @@ export class MyApp {
 					console.log(auth + ' subscribe homepage redir')
 					this.rootPage = HomePage;
 					this.displayName = auth.displayName;
+					this.userEmail = auth.email;
 				}
 			});
 
 			//track displayName
-		this.afAuth.authState.subscribe(user => {
-			if (!user.displayName) {
-				this.displayName = null;
-				return;
-			}
-			else{
-				this.displayName = user.displayName;
-				this.userEmail = user.email;
-				this.rootPage = HomePage;
-				return;
-			}
-		})
+		// this.afAuth.authState.subscribe(user => {
+		// 	if (!user.displayName) {
+		// 		this.displayName = null;
+		// 		return;
+		// 	}
+		// 	else{
+		// 		this.displayName = user.displayName;
+		// 		this.userEmail = user.email;
+		// 		this.rootPage = HomePage;
+		// 		return;
+		// 	}
+		// })
 		
 			platform.ready().then(() => {
 			// Okay, so the platform is ready and our plugins are available.
