@@ -34,6 +34,7 @@ export class MyApp {
 
 	selectedCategory;
 	displayName;
+	userEmail;
 
 	rootPage:any; //= LoginPage;
 	  
@@ -47,14 +48,17 @@ export class MyApp {
 			
 			this.afAuth.authState.subscribe(auth => {
 				if(!auth){
+					console.log(auth + ' subscribe login redir')
 					this.rootPage = LoginPage;
 				}
 				else if(!this.afAuth.auth.currentUser.displayName){
-					console.log
+					console.log(auth + ' subscribe register redir')
 					this.rootPage = RegisterDisplayNamePage;
 				}
 				else{
+					console.log(auth + ' subscribe homepage redir')
 					this.rootPage = HomePage;
+					this.displayName = auth.displayName;
 				}
 			});
 
@@ -66,6 +70,7 @@ export class MyApp {
 			}
 			else{
 				this.displayName = user.displayName;
+				this.userEmail = user.email;
 				this.rootPage = HomePage;
 				return;
 			}
@@ -77,7 +82,11 @@ export class MyApp {
 			statusBar.styleDefault();
 			splashScreen.hide();
 		});
-  	}
+	  }
+	  
+	  consoleTest() {
+		  console.log('Hello test');
+	  }
 
 	categorySelected(category) {
 		for(var i = 0; i < this.items.length; i++) {

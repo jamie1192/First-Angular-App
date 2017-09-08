@@ -47,6 +47,7 @@ export class LoginPage {
 
 	this.afAuth.auth.signInWithEmailAndPassword(this.loginData.email, this.loginData.password)
 	.then(auth => {
+		console.log(auth);
 		//do custom stuff here with auth?
 		let toast = this.toastCtrl.create({
 			message: 'Welcome back ' + this.loginData.email + '!',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 
 import { HomePage } from '../../pages/home/home';
@@ -25,30 +25,38 @@ export class RegisterDisplayNamePage {
 		public navCtrl: NavController, 
 		public navParams: NavParams,
 		public toastCtrl: ToastController,
+		public loadingCtrl: LoadingController,
 		public afAuth: AngularFireAuth) {
 	  }
 	  
 	createDisplayName() {
-		// this.afAuth.auth.currentUser.updateProfile(this.displayData.displayName).then({
-
-		// }
 		var success = this.navCtrl;
+		let loader = this.loadingCtrl.create({
+			content: "Please wait...",
+			dismissOnPageChange: true,
+		  });
+		let toast = this.toastCtrl.create({
+			message: 'An error has occurred, please try again.',
+			duration: 3000,
+			position: 'bottom'
+		});
+		loader.present();
 
-		// })
 		this.afAuth.auth.currentUser.updateProfile({
-		  displayName: this.displayData.displayName,
-		  photoURL: null
+			displayName: this.displayData.displayName,
+			photoURL: null
 		}).then(function() {
 		  // Update successful.
-			// this.afAuth.auth.Update();
-			// this.navCtrl.setRoot(HomePage);
-		//   console.log(this.afAuth.auth.currentUser.displayName + ' added as displayName');
+		  console.log(success);
 		  success.setRoot(HomePage);
 
 		}).catch(function(error) {
 		  // An error happened.
 			console.log(error);
+			loader.dismiss();	
+			toast.present();
 		});
+		
 	}  
 
 	

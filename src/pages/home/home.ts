@@ -9,6 +9,7 @@ import { PopoverController } from 'ionic-angular';
 import { MyPopOverPage } from '../my-pop-over/my-pop-over';
 import { Category } from '../../app/category';
 
+
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -52,7 +53,8 @@ export class HomePage {
 		private toastCtrl: ToastController, 
 		public popoverCtrl: PopoverController, 
 		private afDB: AngularFireDatabase,
-		private auth: AngularFireAuth
+		private auth: AngularFireAuth,
+
 	){
 
 		
@@ -97,6 +99,8 @@ export class HomePage {
 			// console.log(this.items.length+' length');
 		})
 	}
+
+
 
 	addItem() {
 		let addModal = this.modalCtrl.create(AddItemPage);
@@ -304,6 +308,9 @@ export class HomePage {
 
 	logout() {
 		this.auth.auth.signOut();
+
+		// this.appComponent.consoleTest();
+		// this.auth.authState.
 		let toast = this.toastCtrl.create({
 			message: 'You have been logged out!',
 			duration: 3000,
