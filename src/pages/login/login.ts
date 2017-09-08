@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
 import { RegisterPage } from '../../pages/register/register';
-
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -30,14 +29,22 @@ export class LoginPage {
 		public navCtrl: NavController, 
 		public navParams: NavParams,
 		public toastCtrl: ToastController,
+		public loadingCtrl: LoadingController,
 		private afAuth: AngularFireAuth) {
-  }
+  	}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
 
   login() {
+	//show loader to block interaction
+	let loader = this.loadingCtrl.create({
+		content: "Please wait...",
+		dismissOnPageChange: true
+	  });
+	  loader.present();
+
 	this.afAuth.auth.signInWithEmailAndPassword(this.loginData.email, this.loginData.password)
 	.then(auth => {
 		//do custom stuff here with auth?
@@ -50,6 +57,8 @@ export class LoginPage {
 	})
 	.catch(err => {
 		//error handling
+		loader.dismiss();
+
 		let toast = this.toastCtrl.create({
 			message: err.message,
 			duration: 3000

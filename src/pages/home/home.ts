@@ -29,6 +29,8 @@ const CATEGORIES: Category[] = [
 
 export class HomePage {
 
+	displayName;
+
 	dbItems: FirebaseListObservable<any[]>;
 
 	public items = [];	
@@ -53,6 +55,8 @@ export class HomePage {
 		private auth: AngularFireAuth
 	){
 
+		
+
 		// this.dbItems = afDB.list('/cuisines');
 
 		this.dataService.getData().then((todos) => {
@@ -68,9 +72,9 @@ export class HomePage {
 			}
 			// console.log(this.items.length+' length');
 		})
-
-
 	}
+
+
 
 	ionViewDidLoad() {
 
@@ -100,22 +104,35 @@ export class HomePage {
 		this.items = this.filterArr;
 		addModal.onDidDismiss((item) => {
 			if(item){
-				this.saveItem(item);
+				this.saveItem(item); //modal dismissed, save passed item
 			}
 		});
 		addModal.present();
 	}
 
 	saveItem(item){
+		
+		//repopulate this.items incase it was spliced from filtering
 		this.dataService.getData().then((todos) => {
 			if(todos){
 				this.items = JSON.parse(todos);
 				this.filterArr = this.items;
-				// this.filterArr = JSON.parse(todos);
 				this.spanContent = null;
+				
+				console.log(item.title + ' name log test FIREBASE');
+				//save added note
 				this.items.push(item);
 				this.dataService.save(this.items);
 				this.spanContent = null;
+
+				//firebase testing
+				// save() {
+				this.afDB.database.ref('notes/').push().set({
+					title: item.title,
+					description: item.description,
+					category: item.category
+				});
+				// } end save
 			}
 			else{
 				this.spanContent = 'Nothing here yet!';
@@ -126,19 +143,7 @@ export class HomePage {
 			// console.log(this.items.length+' length');
 		})
 		
-
-		//paste
-		// this.dataService.getData().then((todos) => {
-			
-		// 	if(todos){
-		// 		this.items = JSON.parse(todos);
-		// 		this.spanContent = null;
-		// 	}
-		// 	else{
-		// 		this.spanContent = 'Nothing here yet!';
-		// 	}
-		// 	// console.log(this.items.length+' length');
-		// })
+		
 	}
 
 	viewItem(item) {

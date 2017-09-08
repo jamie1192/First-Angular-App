@@ -7,7 +7,8 @@ import { DataProvider } from '../providers/data/data';
 import { HomePage } from '../pages/home/home';
 import { Category } from '../app/category';
 import { LoginPage } from '../pages/login/login';
-import { RegisterPage } from '../pages/register/register';
+import { RegisterDisplayNamePage } from '../pages/register-display-name/register-display-name';
+// import { RegisterPage } from '../pages/register/register';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -21,21 +22,6 @@ const CATEGORIES: Category[] = [
 	{ icon: 'help', name: 'Other' }
 ]
 
-// const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-// 	if (!user) {
-// 		this.rootPage = 'login';
-// 		unsubscribe();
-// 	} else {
-// 		this.rootPage = HomePage;
-// 		unsubscribe();
-// 	}
-// });
-
-// <ion-option value="Personal">Personal</ion-option>
-// <ion-option value="Notes">Notes</ion-option>
-// <ion-option value="Shopping List">Shopping List</ion-option>
-// <ion-option value="To-do">To-do</ion-option> -->
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -47,44 +33,50 @@ export class MyApp {
 	public items = [];
 
 	selectedCategory;
+	displayName;
 
-	  rootPage:any; //= LoginPage;
+	rootPage:any; //= LoginPage;
 	  
 
-	  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public dataService: DataProvider,
-				private afAuth: AngularFireAuth) {
+	constructor(
+		platform: Platform, 
+		statusBar: StatusBar, 
+		splashScreen: SplashScreen, 
+		public dataService: DataProvider,
+		private afAuth: AngularFireAuth) {
 			
 			this.afAuth.authState.subscribe(auth => {
-				if(!auth)
+				if(!auth){
 					this.rootPage = LoginPage;
-				else
+				}
+				else if(!this.afAuth.auth.currentUser.displayName){
+					console.log
+					this.rootPage = RegisterDisplayNamePage;
+				}
+				else{
 					this.rootPage = HomePage;
+				}
 			});
+
+			//track displayName
+		this.afAuth.authState.subscribe(user => {
+			if (!user.displayName) {
+				this.displayName = null;
+				return;
+			}
+			else{
+				this.displayName = user.displayName;
+				this.rootPage = HomePage;
+				return;
+			}
+		})
 		
 			platform.ready().then(() => {
 			// Okay, so the platform is ready and our plugins are available.
 			// Here you can do any higher level native things you might need.
 			statusBar.styleDefault();
 			splashScreen.hide();
-
-			// firebase.initializeApp({
-			// 	apiKey: "AIzaSyCp0xH3jphTGHAWVCnO9N9YDlMT4eS52RU",
-			// 	authDomain: "crossappstasker.firebaseapp.com",
-			// 	databaseURL: "https://crossappstasker.firebaseio.com",
-			// 	projectId: "crossappstasker",
-			// 	storageBucket: "crossappstasker.appspot.com",
-			// 	messagingSenderId: "674430010447"
-			// })
 		});
-		// this.dataService.getData().then((todos) => {
-			
-		// 	if(todos){
-		// 		this.items = JSON.parse(todos);
-		// 		// this.spanContent = null;
-		// 		console.log(this.items);
-		// 	}
-		// })	
-
   	}
 
 	categorySelected(category) {

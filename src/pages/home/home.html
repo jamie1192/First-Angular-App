@@ -1,5 +1,8 @@
 <ion-header>
   <ion-navbar color="primary"> 
+		<button ion-button menuToggle icon-only>
+			<ion-icon name='menu'></ion-icon>
+		</button>
 		<ion-title>
 			Gewgle Keep {{' : ' + categoryPlaceholder}}
 		</ion-title>
@@ -30,8 +33,7 @@
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p> -->
 	<ion-list>
-		<ion-item *ngFor="let item of items" (click)="viewItem(item)" 
-		on-swipe="released(item)">
+		<ion-item *ngFor="let item of items" (click)="viewItem(item)" on-swipe="released(item)">
 		<ion-icon [name]="item.categIcon" item-left></ion-icon>
 		{{item.title}}</ion-item>
 	</ion-list>
@@ -46,5 +48,8 @@
 		</ion-fab>
 
 		<button full ion-button (click)="logout()">Log Out</button>
+
+		<!-- test write -->
+		<button full ion-button (click)="save()">Save test</button>
 
 </ion-content>

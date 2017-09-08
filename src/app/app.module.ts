@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { RegisterDisplayNamePage } from '../pages/register-display-name/register-display-name';
 import { MyPopOverPage } from '../pages/my-pop-over/my-pop-over';
 import { AddItemPage } from '../pages/add-item/add-item';
 import { ItemDetailPage } from '../pages/item-detail/item-detail';
@@ -37,7 +38,8 @@ export const firebaseConfig = {
 	ItemDetailPage, 
 	MyPopOverPage,
 	LoginPage,
-	RegisterPage
+	RegisterPage,
+	RegisterDisplayNamePage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ export const firebaseConfig = {
 	ItemDetailPage,
 	MyPopOverPage,
 	LoginPage,
-	RegisterPage
+	RegisterPage,
+	RegisterDisplayNamePage
 	
   ],
   providers: [

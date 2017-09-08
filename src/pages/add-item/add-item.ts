@@ -46,18 +46,18 @@ saveItem() {
 	// var trimmedIcon = this.selectedCategoryIcon;
 
 	// while(obj.name != undefined) {
-		for(var i=0; this.selectedCategoryIcon == undefined; i++) {
-			var obj = CATEGORIES[i];
-			
-			var nameString = this.selectedCategory.toString();
-			console.log('slot: ' + i);
-			console.log(obj.icon + ' category slot ' + i);
-			console.log(nameString + ' namestring');
-			console.log(obj.name + ' obj.name');
-			if (obj.name == nameString) {
-				this.selectedCategoryIcon = obj.icon;
-			}	
-		}
+	for(var i=0; this.selectedCategoryIcon == undefined; i++) {
+		var obj = CATEGORIES[i];
+		
+		var nameString = this.selectedCategory.toString();
+		console.log('slot: ' + i);
+		console.log(obj.icon + ' category slot ' + i);
+		console.log(nameString + ' namestring');
+		console.log(obj.name + ' obj.name');
+		if (obj.name == nameString) {
+			this.selectedCategoryIcon = obj.icon;
+		}	
+	}
 	
 
 	console.log(this.title+' title length');
@@ -68,8 +68,6 @@ saveItem() {
 		categIcon: this.selectedCategoryIcon
 	};
 
-
-	
 	console.log(this.categIcon + ' Icon after save');
 
 	// var titleTrim = this.title;

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { AlertController, LoadingController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
+
+import { RegisterDisplayNamePage } from '../../pages/register-display-name/register-display-name';
 
 /**
  * Generated class for the RegisterPage page.
@@ -18,6 +20,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class RegisterPage {
 	registerData = {
+		displayName: '',
 		email: '',
 		password: '',
 		passwordRetyped: ''
@@ -27,12 +30,22 @@ export class RegisterPage {
 		public navCtrl: NavController, 
 		public navParams: NavParams, 
 		private alertCtrl: AlertController,
-	private afAuth: AngularFireAuth) {
+		public toastCtrl: ToastController,
+		public loadingCtrl: LoadingController,
+		private afAuth: AngularFireAuth) {
 		this.registerData.email = this.navParams.get('email');
 	}
 
 
 	register() {
+
+		let loader = this.loadingCtrl.create({
+			content: "Please wait...",
+			dismissOnPageChange: true
+		  });
+		  loader.present();
+		
+
 		if(this.registerData.password !== this.registerData.passwordRetyped) {
 			let alert = this.alertCtrl.create({
 				title: 'Error',
@@ -48,9 +61,19 @@ export class RegisterPage {
 		.then(auth => {
 			//something with auth response
 			console.log(auth);
+			let toast = this.toastCtrl.create({
+				message: 'Registration successful!',
+				duration: 3000,
+				position: 'bottom'
+			});
+			toast.present();
+
+			this.navCtrl.push(RegisterDisplayNamePage);
 		})
 		.catch(err => {
 			//error handling
+			loader.dismiss();
+
 			let alert = this.alertCtrl.create({
 				title: 'Error',
 				message: err.message,

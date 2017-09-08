@@ -1,19 +1,22 @@
-<!-- <ion-menu [content]="content">
+<ion-menu [content]="content">
 	<ion-header>
-		<ion-navbar>
-			<ion-title>Gewgle Keep</ion-title>
-			<!- <ion-buttons end>
-				<button ion-button icon-only color="secondary" *ngFor="let category of categories" [class.selected]="category === selectedCategory" (click)="onSelect(category)">{{category.name}}
-					<ion-icon [name]="category.icon"></ion-icon>
-				</button> 
-			</ion-buttons> -->
-		<!-- </ion-navbar>
+		<ion-toolbar color="primary">
+			<ion-title>{{displayName}}</ion-title>
+		</ion-toolbar>
+			<!-- <!- <ion-buttons end> -->
+				
+			<!-- </ion-buttons> -->
+		<!-- </ion-toolbar> -->
 	</ion-header>
 
 	<ion-content>
-		
+		<ion-list>
+			<!-- <button ion-button icon-only color="secondary" *ngFor="let category of categories" [class.selected]="category === selectedCategory" (click)="onSelect(category)">{{category.name}}
+				<ion-icon [name]="category.icon"></ion-icon>
+			</button>  -->
+		</ion-list>
 	</ion-content>
-</ion-menu> --> 
+</ion-menu>
 
 
 <ion-nav [root]="rootPage" #content color="primary" swipeBackEnabled="false"></ion-nav>

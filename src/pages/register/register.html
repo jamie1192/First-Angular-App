@@ -16,26 +16,33 @@
 <ion-content padding>
 
 	<ion-list>
+		
+		<!-- Display Name -->
+			<!-- <ion-item>
+				<ion-label floating>Display Name</ion-label>
+				<ion-input type="text" [(ngModel)]="registerData.displayName"></ion-input>
+			</ion-item>
+		 -->
 		<!-- Email -->
-		<ion-item>
-			<ion-label floating>Email</ion-label>
-			<ion-input type="email" [(ngModel)]="registerData.email"></ion-input>
-		</ion-item>
+			<ion-item>
+				<ion-label floating>Email</ion-label>
+				<ion-input type="email" [(ngModel)]="registerData.email"></ion-input>
+			</ion-item>
 
-		<!-- Password -->
-		<ion-item>
-			<ion-label floating>Password</ion-label>
-			<ion-input type="password" [(ngModel)]="registerData.password"></ion-input>
-		</ion-item>
+			<!-- Password -->
+			<ion-item>
+				<ion-label floating>Password</ion-label>
+				<ion-input type="password" [(ngModel)]="registerData.password"></ion-input>
+			</ion-item>
 
-		<!-- Confirm password -->
-		<ion-item>
-			<ion-label floating>Confirm Password</ion-label>
-			<ion-input type="password" [(ngModel)]="registerData.passwordRetyped"></ion-input>
-		</ion-item>
-	</ion-list>
+			<!-- Confirm password -->
+			<ion-item>
+				<ion-label floating>Confirm Password</ion-label>
+				<ion-input type="password" [(ngModel)]="registerData.passwordRetyped"></ion-input>
+			</ion-item>
+		</ion-list>
 
-	<button full ion-button (click)="register()">Register</button>
+		<button full ion-button (click)="register()">Register</button>
 
 
 </ion-content>
