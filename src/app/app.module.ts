@@ -19,6 +19,7 @@ import { FirebaseProvider } from '../providers/firebase/firebase';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { GetCurrentUserProvider } from '../providers/get-current-user/get-current-user';
 
 export const firebaseConfig = {
 	apiKey: "AIzaSyCp0xH3jphTGHAWVCnO9N9YDlMT4eS52RU",
@@ -66,7 +67,8 @@ export const firebaseConfig = {
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
-    FirebaseProvider
+    FirebaseProvider,
+    GetCurrentUserProvider
   ]
 })
 export class AppModule {}

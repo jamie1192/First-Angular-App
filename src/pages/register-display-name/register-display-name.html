@@ -20,6 +20,11 @@
 			<ion-input type="text" [(ngModel)]="displayData.displayName"></ion-input>
 		</ion-item>
 
+		<ion-item>
+			<ion-label floating>Photo URL (optional)</ion-label>
+			<ion-input type="url" [(ngModel)]="displayData.photoURL"></ion-input>
+		</ion-item>
+
 		<button full ion-button (click)="createDisplayName()">Set Display Name</button>
 
 </ion-content>

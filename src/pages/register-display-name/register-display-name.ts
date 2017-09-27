@@ -19,6 +19,7 @@ export class RegisterDisplayNamePage {
 
 	displayData = {
 		displayName: '',
+		photoURL: ''
 	}
 
 	constructor(
@@ -44,7 +45,7 @@ export class RegisterDisplayNamePage {
 
 		this.afAuth.auth.currentUser.updateProfile({
 			displayName: this.displayData.displayName,
-			photoURL: null
+			photoURL: this.displayData.photoURL
 		}).then(function() {
 		  // Update successful.
 		  console.log(success);

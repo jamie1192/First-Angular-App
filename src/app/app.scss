@@ -14,3 +14,40 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+.logoutButton {
+	position: absolute;
+	bottom: 0;
+}
+
+.menuHeader {
+	height: 200px;
+	background-color: #4c8dfb;
+	position: relative;
+}
+
+.userHeaderContainer {
+	position: absolute;
+	bottom: 0;
+	padding-bottom: 25px;
+	padding-left: 15px;
+	color: #ffffff;
+}
+
+.userName {
+	color: #ffffff;
+}
+
+.userEmail {
+	margin-left: 13px;
+	font-style: italic;
+}
+
+.userPhotoContainer {
+	border: 2px solid red;
+	border-radius: 90px;
+	height: 90px;
+	width: 90px;
+	position: absolute;
+	margin: 25px;
+}

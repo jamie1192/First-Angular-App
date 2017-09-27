@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController } from 'ionic-angular';
+import { ModalController, NavController, LoadingController } from 'ionic-angular';
 import { AddItemPage } from '../add-item/add-item';
 import { ItemDetailPage } from '../item-detail/item-detail';
 import { DataProvider } from '../../providers/data/data';
@@ -32,9 +32,9 @@ export class HomePage {
 
 	displayName;
 
-	dbItems: FirebaseListObservable<any[]>;
+	items: FirebaseListObservable<any[]>;
 
-	public items = [];	
+	// public items = [];	
 	public backupArr = [];
 	public filterArr = [];
 
@@ -50,54 +50,55 @@ export class HomePage {
 		public navCtrl: NavController, 
 		public modalCtrl: ModalController, 
 		public dataService: DataProvider, 
-		private toastCtrl: ToastController, 
+		private toastCtrl: ToastController,
+		public loadingCtrl: LoadingController, 
 		public popoverCtrl: PopoverController, 
 		private afDB: AngularFireDatabase,
 		private auth: AngularFireAuth,
 
 	){
 
-		
+		this.items = afDB.list('/notes');
 
 		// this.dbItems = afDB.list('/cuisines');
 
-		this.dataService.getData().then((todos) => {
+		// this.dataService.getData().then((todos) => {
 
-			if(todos){
-				this.items = JSON.parse(todos);
-				this.filterArr = this.items;
-				// this.filterArr = JSON.parse(todos);
-				this.spanContent = null;
-			}
-			else{
-				this.spanContent = 'Nothing here yet!';
-			}
-			// console.log(this.items.length+' length');
-		})
+		// 	if(todos){
+		// 		this.items = JSON.parse(todos);
+		// 		this.filterArr = this.items;
+		// 		// this.filterArr = JSON.parse(todos);
+		// 		this.spanContent = null;
+		// 	}
+		// 	else{
+		// 		this.spanContent = 'Nothing here yet!';
+		// 	}
+		// 	// console.log(this.items.length+' length');
+		// })
 	}
 
 
 
 	ionViewDidLoad() {
 
-		this.dataService.getData().then((todos) => {
+		// this.dataService.getData().then((todos) => {
 			
-			if(todos){
-				this.items = JSON.parse(todos);
-				this.spanContent = null;
-			}
-			else{
-				this.spanContent = 'Nothing here yet!';
-			}
-			if (this.items.length == 0) {
+		// 	if(todos){
+		// 		this.items = JSON.parse(todos);
+		// 		this.spanContent = null;
+		// 	}
+		// 	else{
+		// 		this.spanContent = 'Nothing here yet!';
+		// 	}
+		// 	if (this.items.length == 0) {
 				
-				this.spanContent = 'Nothing here yet!';
-			}
-			// else if (this.items.length != 0) {
-			// 	this.spanContent = null;
-			// }
-			// console.log(this.items.length+' length');
-		})
+		// 		this.spanContent = 'Nothing here yet!';
+		// 	}
+		// 	// else if (this.items.length != 0) {
+		// 	// 	this.spanContent = null;
+		// 	// }
+		// 	// console.log(this.items.length+' length');
+		// })
 	}
 
 
@@ -105,7 +106,7 @@ export class HomePage {
 	addItem() {
 		let addModal = this.modalCtrl.create(AddItemPage);
 
-		this.items = this.filterArr;
+		// this.items = this.filterArr;
 		addModal.onDidDismiss((item) => {
 			if(item){
 				this.saveItem(item); //modal dismissed, save passed item
@@ -117,38 +118,39 @@ export class HomePage {
 	saveItem(item){
 		
 		//repopulate this.items incase it was spliced from filtering
-		this.dataService.getData().then((todos) => {
-			if(todos){
-				this.items = JSON.parse(todos);
-				this.filterArr = this.items;
-				this.spanContent = null;
+		// this.dataService.getData().then((todos) => {
+		// 	if(todos){
+		// 		this.items = JSON.parse(todos);
+		// 		// this.filterArr = this.items;
+		// 		this.spanContent = null;
 				
-				console.log(item.title + ' name log test FIREBASE');
-				//save added note
-				this.items.push(item);
-				this.dataService.save(this.items);
-				this.spanContent = null;
+		// 		console.log(item.title + ' name log test FIREBASE');
+		// 		//save added note
+		// 		this.items.push(item);
+		// 		this.dataService.save(this.items);
+		// 		this.spanContent = null;
 
-				//firebase testing
-				// save() {
+		// 		//firebase testing
+		// 		// save() {
 				this.afDB.database.ref('notes/').push().set({
 					title: item.title,
 					description: item.description,
-					category: item.category
+					category: item.category,
+					author: item.author
 				});
 				// } end save
 			}
-			else{
-				this.spanContent = 'Nothing here yet!';
-				this.items.push(item);
-				this.dataService.save(this.items);
-				this.spanContent = null;
-			}
+			// else{
+			// 	this.spanContent = 'Nothing here yet!';
+			// 	this.items.push(item);
+			// 	this.dataService.save(this.items);
+			// 	this.spanContent = null;
+			// }
 			// console.log(this.items.length+' length');
-		})
+	// 	})
 		
 		
-	}
+	// }
 
 	viewItem(item) {
 		this.navCtrl.push(ItemDetailPage, {
@@ -176,7 +178,7 @@ export class HomePage {
 							this.items = JSON.parse(todos);
 							console.log(this.items + ' if todos read');
 
-							for(var i = 0; i < this.items.length; i++) {
+							for(var i = 0; i < 6; i++) {
 								console.log(this.items + ' for');
 								var obj = this.items[i];
 								
@@ -186,14 +188,14 @@ export class HomePage {
 									this.spanContent = 'Nothing here yet!';
 								}
 
-								// //this wors but cuts from this.items
+								// //this works but cuts from this.items
 								else if(obj.category.trim() !== this.selectedCategory) {	
-									this.items.splice(i, 1);
+									// this.items.splice(i, 1);
 									console.log(this.items + ' inside');
 									i--;
-									if(this.items.length == 0) {
-										this.spanContent = 'Nothing here yet!';
-									}
+									// if(this.items.length == 0) {
+									// 	this.spanContent = 'Nothing here yet!';
+									// }
 
 									// console.log(this.filterArr + ' filter count');
 									// this.items = this.filterArr;
@@ -217,19 +219,19 @@ export class HomePage {
 					
 				}
 				else {
-					this.dataService.getData().then((todos) => {
+					// this.dataService.getData().then((todos) => {
 						
-						if(todos){
-							this.items = JSON.parse(todos);
-							this.filterArr = this.items;
-							// this.filterArr = JSON.parse(todos);
-							console.log(this.items.length+ ' length');
-							this.spanContent = null;
-						}
-						else{
-							this.spanContent = 'Nothing here yet!';
-						}
-					})
+					// 	if(todos){
+					// 		this.items = JSON.parse(todos);
+					// 		this.filterArr = this.items;
+					// 		// this.filterArr = JSON.parse(todos);
+					// 		console.log(this.items.length+ ' length');
+					// 		this.spanContent = null;
+					// 	}
+					// 	else{
+					// 		this.spanContent = 'Nothing here yet!';
+					// 	}
+					// })
 				}
 			}
 			console.log(popoverData + ' debug');
@@ -254,68 +256,40 @@ export class HomePage {
 		console.log('list item active');
 	}
   
-	public released(item) {
-		console.log('list item released');
-		let toast = this.toastCtrl.create({
-			message: item.title + ' deleted!',
-			duration: 3000,
-			position: 'bottom'
-		});
-		toast.present();
-
-		console.log(this.items);
-
-		// delete this.items[item.title];
-		// this.items = this.items;
-		// //TODO 
-		// // this.items = [];
-
-		for(var i = 0; i < this.items.length; i++) {
-			var obj = this.items[i];
-		
-			if([item.title].indexOf(obj.title) !== -1) {
-				this.items.splice(i, 1);
-				// i--; ?
-			}
-		}
-		if (this.items.length == 0) {
-			
-			this.spanContent = 'Nothing here yet!';
-		}
-
-		//save edited items again
-		this.dataService.save(this.items);
-		
-
-		// delete this.items[0][item.title];
-		console.log(this.items);
-
-	}
-
-	public filter(category: Category): void {
-		this.selectedCategory = category;
-		console.log('selected: ' + this.selectedCategory.name);
-		for(var i = 0; i < this.items.length; i++) {
-			var obj = this.items[i];
-			console.log(this.selectedCategory.name + 'items2');
-			if([this.selectedCategory.name].indexOf(obj.category) !== -1) {
-				this.items.splice(i, 1);
-				// i--; ?
-				console.log(this.items);
-			}
-		}
-	}
-
+	
 	logout() {
-		this.auth.auth.signOut();
+		//Show loaders and toast, still within scope of constructor to access
+		let loader = this.loadingCtrl.create({
+			content: "Logging Out...",
+			dismissOnPageChange: true,
+			duration: 3000
+		});
+		loader.present();
 
-		// this.appComponent.consoleTest();
-		// this.auth.authState.
 		let toast = this.toastCtrl.create({
 			message: 'You have been logged out!',
 			duration: 3000,
 			position: 'bottom'
 		});
-		toast.present();
+
+		this.auth.auth.signOut()
+		.then(function() {
+			//signed out
+			toast.present();
+			loader.dismiss();
+
+		}, function(error) {
+			//Error - I gon' dun goofed?
+			console.log(error);
+			let errorToast = this.toastCtrl.create({
+				message: error,
+				duration: 3000,
+				position: 'bottom'
+			});
+			//Dismiss loaders and show error toast
+			loader.dismiss();
+			errorToast.present();
+		});
 	}
+	
 }

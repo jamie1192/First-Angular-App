@@ -3,6 +3,10 @@ import { ToastController } from 'ionic-angular';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Category } from '../../app/category';
 
+import { GetCurrentUserProvider } from '../../providers/get-current-user/get-current-user';
+
+import { AngularFireAuth } from 'angularfire2/auth';
+
 /**
  * Generated class for the AddItemPage page.
  *
@@ -35,9 +39,15 @@ export class AddItemPage {
 	selectedCategory: Category;
 	selectedCategoryIcon;
 
-constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, 
-		private toastCtrl: ToastController) {
+	currentUser;
 
+constructor(
+	public navCtrl: NavController, 
+	public navParams: NavParams, 
+	public view: ViewController, 
+	private getUser: GetCurrentUserProvider,
+	private auth: AngularFireAuth,
+	private toastCtrl: ToastController) {
 }
 
 saveItem() {
@@ -65,6 +75,7 @@ saveItem() {
 		title: this.title,
 		description: this.description,
 		category: this.selectedCategory,
+		author: this.currentUser,
 		categIcon: this.selectedCategoryIcon
 	};
 
@@ -128,7 +139,9 @@ onSelect(category: Category): void {
 }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AddItemPage');
+	console.log('ionViewDidLoad AddItemPage');
+	this.currentUser = this.getUser.getCurrentUser();
+	console.log('current user is - ' + this.currentUser);
   }
 
 }

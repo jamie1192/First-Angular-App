@@ -17,7 +17,7 @@
 	  </button> -->
 		<ion-buttons end>
 			<button ion-button icon-only (click)="presentPopover($event)">
-				<ion-icon name="funnel"></ion-icon>
+				<!-- <ion-icon name="funnel"></ion-icon> -->
 			</button>
 		</ion-buttons>
 		
@@ -33,9 +33,8 @@
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
   </p> -->
 	<ion-list>
-		<ion-item *ngFor="let item of items" (click)="viewItem(item)" on-swipe="released(item)">
-		<ion-icon [name]="item.categIcon" item-left></ion-icon>
-		{{item.title}}</ion-item>
+		<ion-item *ngFor="let item of items | async" (click)="viewItem(item)" on-swipe="released(item)">{{item.title}}</ion-item>
+		<!-- <ion-icon [name]="item.categIcon" item-left></ion-icon> -->
 	</ion-list>
 
 	<!-- (click)="viewItem(item)" -->

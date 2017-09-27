@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, LoadingController, ToastController, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataProvider } from '../providers/data/data';
@@ -39,12 +39,15 @@ export class MyApp {
 	rootPage:any; //= LoginPage;
 	  
 
-	constructor(
+	constructor( 
 		platform: Platform, 
 		statusBar: StatusBar, 
 		splashScreen: SplashScreen, 
 		public dataService: DataProvider,
-		private afAuth: AngularFireAuth) {
+		public menu: MenuController,
+		private afAuth: AngularFireAuth,
+		public loadingCtrl: LoadingController,
+		public toastCtrl: ToastController) {
 			
 			this.afAuth.authState.subscribe(auth => {
 				if(!auth){
@@ -59,21 +62,23 @@ export class MyApp {
 					console.log(auth + ' subscribe homepage redir')
 					this.rootPage = HomePage;
 					this.displayName = auth.displayName;
+					this.userEmail = auth.email;
 				}
 			});
 
 			//track displayName
 		this.afAuth.authState.subscribe(user => {
-			if (!user.displayName) {
-				this.displayName = null;
-				return;
-			}
-			else{
-				this.displayName = user.displayName;
-				this.userEmail = user.email;
-				this.rootPage = HomePage;
-				return;
-			}
+			// if (!user.displayName) {
+			// 	this.displayName = null;
+			// 	return;
+			// }
+			// else{
+			// 	this.displayName = user.displayName;
+			// 	this.userEmail = user.email;
+			// 	this.rootPage = HomePage;
+			// 	return;
+			// }
+			console.log(user);
 		})
 		
 			platform.ready().then(() => {
@@ -113,6 +118,44 @@ export class MyApp {
 					console.log(this.items);
 				}
 			}
+	}
+
+	logout() {
+
+		//Show loaders and toast, still within scope of constructor to access
+		let loader = this.loadingCtrl.create({
+			content: "Logging Out...",
+			dismissOnPageChange: true,
+			duration: 3000
+		});
+		loader.present();
+
+		let toast = this.toastCtrl.create({
+			message: 'You have been logged out!',
+			duration: 3000,
+			position: 'bottom'
+		});
+
+		this.afAuth.auth.signOut()
+		.then(function() {
+			//signed out
+			toast.present();
+			loader.dismiss();
+
+
+
+		}, function(error) {
+			//Error - I gon' dun goofed?
+			console.log(error);
+			let errorToast = this.toastCtrl.create({
+				message: error,
+				duration: 3000,
+				position: 'bottom'
+			});
+			//Dismiss loaders and show error toast
+			loader.dismiss();
+			errorToast.present();
+		});
 	}
 }
 
