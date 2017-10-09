@@ -9,12 +9,14 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { RegisterDisplayNamePage } from '../pages/register-display-name/register-display-name';
+import { UpdateProfilePage } from '../pages/update-profile/update-profile';
 import { MyPopOverPage } from '../pages/my-pop-over/my-pop-over';
 import { AddItemPage } from '../pages/add-item/add-item';
 import { ItemDetailPage } from '../pages/item-detail/item-detail';
 import { DataProvider } from '../providers/data/data';
 import { IonicStorageModule } from '@ionic/storage';
 import { FirebaseProvider } from '../providers/firebase/firebase';
+import { Camera, CameraOptions } from '@ionic-native/camera'
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -40,7 +42,8 @@ export const firebaseConfig = {
 	MyPopOverPage,
 	LoginPage,
 	RegisterPage,
-	RegisterDisplayNamePage
+	RegisterDisplayNamePage,
+	UpdateProfilePage
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ export const firebaseConfig = {
 	MyPopOverPage,
 	LoginPage,
 	RegisterPage,
-	RegisterDisplayNamePage
+	RegisterDisplayNamePage,
+	UpdateProfilePage
 	
   ],
   providers: [
@@ -68,7 +72,8 @@ export const firebaseConfig = {
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     DataProvider,
     FirebaseProvider,
-    GetCurrentUserProvider
+	GetCurrentUserProvider,
+	Camera
   ]
 })
 export class AppModule {}

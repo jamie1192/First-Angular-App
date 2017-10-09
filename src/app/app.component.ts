@@ -3,14 +3,18 @@ import { Nav, Platform, LoadingController, ToastController, MenuController } fro
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { DataProvider } from '../providers/data/data';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { HomePage } from '../pages/home/home';
 import { Category } from '../app/category';
 import { LoginPage } from '../pages/login/login';
+import { UpdateProfilePage } from '../pages/update-profile/update-profile';
 import { RegisterDisplayNamePage } from '../pages/register-display-name/register-display-name';
 // import { RegisterPage } from '../pages/register/register';
 
 import { AngularFireAuth } from 'angularfire2/auth';
+// import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import firebase from 'firebase';
 
 
 const CATEGORIES: Category[] = [
@@ -34,7 +38,10 @@ export class MyApp {
 
 	selectedCategory;
 	displayName;
+	photoURL;
 	userEmail;
+	userUID;
+	pathReference;
 
 	rootPage:any; //= LoginPage;
 	  
@@ -47,7 +54,9 @@ export class MyApp {
 		public menu: MenuController,
 		private afAuth: AngularFireAuth,
 		public loadingCtrl: LoadingController,
-		public toastCtrl: ToastController) {
+		public toastCtrl: ToastController,
+		private sanitizer: DomSanitizer
+	) {
 			
 			this.afAuth.authState.subscribe(auth => {
 				if(!auth){
@@ -62,12 +71,68 @@ export class MyApp {
 					console.log(auth + ' subscribe homepage redir')
 					this.rootPage = HomePage;
 					this.displayName = auth.displayName;
+					this.photoURL = auth.photoURL;
 					this.userEmail = auth.email;
+					this.userUID = auth.uid;
+					console.log("UID: " +this.userUID)
+
+					//get profile image
+					// var storage = firebase.storage();
+					// var storageRef = storage.ref();
+					// this.pathReference = storage.ref('profileImages/'+this.userUID+'.jpg');
+					// var refURL = 'gs://crossappstasker.appspot.com/profileImages/'+this.userUID+'.jpg';
+					// this.pathReference = ;
+					// var gsReference = storage.refFromURL('gs://crossappstasker.appspot.com/profileImages/');
+					// console.log('profileImages/'+this.userUID+'.jpg');
+
+					// storageRef.child('profileImages/'+this.userUID+'.jpg').getDownloadURL().then(function(url) {
+					// 	// This can be downloaded directly:
+					//  // This can be downloaded directly:
+					// 	// var xhr = new XMLHttpRequest();
+					// 	// xhr.responseType = 'blob';
+					// 	// xhr.onload = function(event) {
+					// 	// 	var blob = xhr.response;
+					// 	// 	console.log("blob: " + blob);
+					// 	// };
+					// 	// xhr.open('GET', url);
+					// 	// xhr.send();
+						
+					// 	// Or inserted into an <img> element:
+					// 	var img = document.getElementById('profilePic') as HTMLImageElement;;
+					// 	img.src = url;
+
+					// 	// this.photoURL = url;
+					// 	// this.photoURL = sanitizer.bypassSecurityTrustUrl(url);
+					// }).catch(function(error) {
+					// 	console.log(error);
+					// });
+					// console.log("debug2: " +this.photoURL);
+					// this.pathReference = "https://firebasestorage.googleapis.com/v0/b/crossappstasker.appspot.com/o/profileImages%2F"+this.userUID+".jpg?alt=media&token=8f5e824d-1814-4f94-97d1-6c7bc6d411dc";
+					
+					// var tempPhotoURL = storage.refFromURL(this.pathReference).getDownloadURL().then(function(url) {
+
+					// 	this.photoURL = tempPhotoURL;
+
+					// 	}).catch(function(error) {
+
+					// 	});
+					// console.log("PRTest: " +this.pathReference)
+					// this.pathReference.getDownloadURL().then(function(url) {
+					// 	this.photoURL = url;
+					// 	console.log(url);
+					// });
+					// this.photoURL = sanitizer.bypassSecurityTrustUrl(this.pathReference);
+					// this.photoURL = this.pathReference;
+					// console.log("photo: "+ this.photoURL);
 				}
 			});
+			// https://firebasestorage.googleapis.com/v0/b/crossappstasker.appspot.com/o/profileImages%2F8fhEaNvXCeNAoBbh7i1fFDRYn833.jpg?alt=media&token=8f5e824d-1814-4f94-97d1-6c7bc6d411dc
+
+			
 
 			//track displayName
 		this.afAuth.authState.subscribe(user => {
+			// this.photoURL = user.photoURL;
 			// if (!user.displayName) {
 			// 	this.displayName = null;
 			// 	return;
@@ -156,6 +221,10 @@ export class MyApp {
 			loader.dismiss();
 			errorToast.present();
 		});
+	}
+
+	updateProfile(){
+		this.nav.push(UpdateProfilePage);
 	}
 }
 

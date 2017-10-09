@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 // import { Http } from '@angular/http';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 import 'rxjs/add/operator/map';
 
@@ -15,13 +16,20 @@ export class GetCurrentUserProvider {
 
   constructor(
 	// public http: Http,
-	private afAuth: AngularFireAuth) {
+	private afAuth: AngularFireAuth,
+	private afDb: AngularFireDatabase
+) {
     console.log('Hello GetCurrentUserProvider Provider');
   }
 
   getCurrentUser(){
-	  var user = this.afAuth.auth.currentUser.displayName;
+	  var user = this.afAuth.auth.currentUser;
 	  return user;
   }
+
+
+//   loadProfilePhoto() {
+// 	  this.afDb.database.
+//   }
 
 }

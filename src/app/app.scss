@@ -44,10 +44,14 @@
 }
 
 .userPhotoContainer {
-	border: 2px solid red;
+	// border: 2px solid red;
 	border-radius: 90px;
 	height: 90px;
 	width: 90px;
 	position: absolute;
 	margin: 25px;
+}
+
+.profileImg {
+	border-radius: 90px;
 }

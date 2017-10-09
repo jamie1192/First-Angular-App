@@ -45,6 +45,7 @@ export class HomePage {
 	categories = CATEGORIES;
 	selectedCategory;
 	categoryPlaceholder = 'All';
+	userUID;
 
 	constructor(
 		public navCtrl: NavController, 
@@ -58,7 +59,9 @@ export class HomePage {
 
 	){
 
-		this.items = afDB.list('/notes');
+		this.userUID = this.auth.auth.currentUser.uid;
+
+		this.items = afDB.list('/notes/'+this.userUID);
 
 		// this.dbItems = afDB.list('/cuisines');
 
@@ -99,6 +102,9 @@ export class HomePage {
 		// 	// }
 		// 	// console.log(this.items.length+' length');
 		// })
+		
+		this.userUID = this.auth.auth.currentUser.uid;
+		// console.log("UID: " +this.userUID)
 	}
 
 
@@ -156,6 +162,7 @@ export class HomePage {
 		this.navCtrl.push(ItemDetailPage, {
 			item: item
 		});
+		console.log(item);
 	}
 
 	presentPopover(myEvent) {
