@@ -122,7 +122,7 @@ export class HomePage {
 	}
 
 	saveItem(item){
-		
+		//#region old code 
 		//repopulate this.items incase it was spliced from filtering
 		// this.dataService.getData().then((todos) => {
 		// 	if(todos){
@@ -135,7 +135,7 @@ export class HomePage {
 		// 		this.items.push(item);
 		// 		this.dataService.save(this.items);
 		// 		this.spanContent = null;
-
+//#endregion
 		// 		//firebase testing
 		// 		// save() {
 				this.afDB.database.ref('notes/'+this.userUID).push().set({
