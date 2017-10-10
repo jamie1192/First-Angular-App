@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>register-displayName</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Register Account Details</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -25,6 +25,10 @@
 			<ion-input type="url" [(ngModel)]="displayData.photoURL"></ion-input>
 		</ion-item>
 
-		<button full ion-button (click)="createDisplayName()">Set Display Name</button>
+		
 
 </ion-content>
+
+<ion-footer>
+		<button full ion-button (click)="createDisplayName()">Set Display Name</button>
+</ion-footer>

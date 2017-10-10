@@ -69,15 +69,32 @@ export class UpdateProfilePage {
 		  });
 		  loader.present();
 
+		  //success toast
+		  let toast = this.toastCtrl.create({
+			message: 'Profile updated!',
+			duration: 3000,
+			position: 'bottom'
+		});
+
+		// error toast
+		let toastError = this.toastCtrl.create({
+			message: 'An error has occurred!',
+			duration: 3000,
+			position: 'bottom'
+		});
 		  if (this.displayData.displayName != '') { //displayName was updated
 			  this.auth.auth.currentUser.updateProfile({
 				  displayName: this.displayData.displayName,
-				  photoURL: '',
+				  photoURL: this.displayData.photoURL,
 			  }).then(function() {
 				  loader.dismiss()
+				  
+				toast.present();
 				  console.log("displayName updated" );
 			  }).catch(function(error) {
 				  console.log(error);
+				  
+				toastError.present();
 			  })
 		  }
 

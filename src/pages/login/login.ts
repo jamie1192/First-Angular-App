@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, LoadingController, MenuController } from 'ionic-angular';
 import { RegisterPage } from '../../pages/register/register';
 
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -30,10 +30,14 @@ export class LoginPage {
 		public navParams: NavParams,
 		public toastCtrl: ToastController,
 		public loadingCtrl: LoadingController,
-		private afAuth: AngularFireAuth) {
+		private afAuth: AngularFireAuth,
+		private menuCtrl: MenuController
+	) {
   	}
 
   ionViewDidLoad() {
+	  this.menuCtrl.close();
+	  this.menuCtrl.enable(false);
     console.log('ionViewDidLoad LoginPage');
   }
 
@@ -48,6 +52,7 @@ export class LoginPage {
 	this.afAuth.auth.signInWithEmailAndPassword(this.loginData.email, this.loginData.password)
 	.then(auth => {
 		console.log(auth);
+		this.menuCtrl.enable(true);
 		//do custom stuff here with auth?
 		let toast = this.toastCtrl.create({
 			message: 'Welcome back ' + this.loginData.email + '!',

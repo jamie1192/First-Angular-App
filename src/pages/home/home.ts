@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController, NavController, LoadingController } from 'ionic-angular';
+import { ModalController, NavController, LoadingController, MenuController } from 'ionic-angular';
 import { AddItemPage } from '../add-item/add-item';
 import { ItemDetailPage } from '../item-detail/item-detail';
 import { DataProvider } from '../../providers/data/data';
@@ -39,6 +39,7 @@ export class HomePage {
 	public filterArr = [];
 
 	spanContent;
+	itemCount;
 	background: string;
 	contentEle: any;
 	textEle: any;
@@ -56,13 +57,14 @@ export class HomePage {
 		public popoverCtrl: PopoverController, 
 		private afDB: AngularFireDatabase,
 		private auth: AngularFireAuth,
+		private menuCtrl: MenuController
 
 	){
-
 		this.userUID = this.auth.auth.currentUser.uid;
 
 		this.items = afDB.list('/notes/'+this.userUID);
 
+		//#region old code
 		// this.dbItems = afDB.list('/cuisines');
 
 		// this.dataService.getData().then((todos) => {
@@ -78,12 +80,19 @@ export class HomePage {
 		// 	}
 		// 	// console.log(this.items.length+' length');
 		// })
+		//#endregion
 	}
 
 
 
 	ionViewDidLoad() {
 
+		console.log("FBase items: " +this.itemCount);
+
+		if(!this.items) {
+			this.spanContent = "Nothing here yet!";
+		}
+		//#region old code
 		// this.dataService.getData().then((todos) => {
 			
 		// 	if(todos){
@@ -105,6 +114,8 @@ export class HomePage {
 		
 		// this.userUID = this.auth.auth.currentUser.uid;
 		// console.log("UID: " +this.userUID)
+
+		//#endregion
 	}
 
 
@@ -146,6 +157,7 @@ export class HomePage {
 				});
 				// } end save
 			}
+			//#region  more old code
 			// else{
 			// 	this.spanContent = 'Nothing here yet!';
 			// 	this.items.push(item);
@@ -157,6 +169,7 @@ export class HomePage {
 		
 		
 	// }
+	//#endregion
 
 	viewItem(item) {
 		this.navCtrl.push(ItemDetailPage, {

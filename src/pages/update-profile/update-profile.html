@@ -6,13 +6,35 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>updateProfile</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Update Profile Details</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+
+	<!-- Edit display name -->
+	<ion-item>
+			<ion-label floating>Display Name</ion-label>
+			<ion-input type="text" [(ngModel)]="displayData.displayName"></ion-input>
+		</ion-item>
+
+		<ion-item>
+				<ion-label floating>Photo URL (optional)</ion-label>
+				<ion-input type="text" [(ngModel)]="displayData.photoURL"></ion-input>
+			</ion-item>
+	
+		<!-- Edit profile image -->
+		<ion-item>
+			<button ion-button clear (click)="capture()">Take profile photo</button>
+			<img item-right class="capturedImage" [src]="captureDataUrl" *ngIf="captureDataUrl"/>
+		</ion-item>
+		
+		<!-- update profile -->
+		<ion-item class="submitUpdate">
+			<button ion-button clear full (click)="upload()">Update Profile</button>
+		</ion-item>
 
 </ion-content>

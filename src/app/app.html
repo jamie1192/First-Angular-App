@@ -3,7 +3,7 @@
 		<!-- <ion-toolbar color="primary"> -->
 			<div class="menuHeader">
 				<div class="userPhotoContainer">
-
+						<img class="profileImg" [src]="''+photoURL+''"> 
 				</div>
 
 				<div class="userHeaderContainer">
@@ -26,6 +26,11 @@
 			<!-- <button ion-button icon-only color="secondary" *ngFor="let category of categories" [class.selected]="category === selectedCategory" (click)="onSelect(category)">{{category.name}}
 				<ion-icon [name]="category.icon"></ion-icon>
 			</button>  -->
+			<ion-item class="updateProfileBtn">
+				<button ion-button clear full (click)="updateProfile()">Update Profile</button>
+				<ion-icon name="contact" item-left></ion-icon>
+			</ion-item>
+
 		</ion-list>
 		<ion-item class="logoutButton">
 			<button ion-button clear full (click)="logout()">Log Out</button>

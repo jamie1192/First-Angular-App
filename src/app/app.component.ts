@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home/home';
 import { Category } from '../app/category';
 import { LoginPage } from '../pages/login/login';
 import { RegisterDisplayNamePage } from '../pages/register-display-name/register-display-name';
+import { UpdateProfilePage } from '../pages/update-profile/update-profile';
 // import { RegisterPage } from '../pages/register/register';
 
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -35,6 +36,7 @@ export class MyApp {
 	selectedCategory;
 	displayName;
 	userEmail;
+	photoURL;
 
 	rootPage:any; //= LoginPage;
 	  
@@ -44,7 +46,7 @@ export class MyApp {
 		statusBar: StatusBar, 
 		splashScreen: SplashScreen, 
 		public dataService: DataProvider,
-		public menu: MenuController,
+		public menuCtrl: MenuController,
 		private afAuth: AngularFireAuth,
 		public loadingCtrl: LoadingController,
 		public toastCtrl: ToastController) {
@@ -63,6 +65,7 @@ export class MyApp {
 					this.rootPage = HomePage;
 					this.displayName = auth.displayName;
 					this.userEmail = auth.email;
+					this.photoURL = auth.photoURL;
 				}
 			});
 
@@ -156,6 +159,11 @@ export class MyApp {
 			loader.dismiss();
 			errorToast.present();
 		});
+	}
+
+	updateProfile() {
+		this.menuCtrl.close();
+		this.nav.push(UpdateProfilePage);
 	}
 }
 
