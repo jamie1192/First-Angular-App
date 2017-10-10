@@ -36,9 +36,9 @@ export class ItemDetailPage {
 	this.title = this.navParams.get('item').title;
 	this.description = this.navParams.get('item').description;
 	this.category = this.navParams.get('item').category;
-	this.key = this.navParams.get('item').$key;
+	// this.key = this.navParams.get('item').$key;
 
-	this.description += this.key;
+	// this.description += this.key;
   }
 
   deleteItem() {

@@ -59,9 +59,9 @@ export class HomePage {
 
 	){
 
-		this.userUID = this.auth.auth.currentUser.uid;
+		// this.userUID = this.auth.auth.currentUser.uid;
 
-		this.items = afDB.list('/notes/'+this.userUID);
+		this.items = afDB.list('/notes/');
 
 		// this.dbItems = afDB.list('/cuisines');
 
