@@ -9,7 +9,6 @@ import { Category } from '../app/category';
 import { LoginPage } from '../pages/login/login';
 import { RegisterDisplayNamePage } from '../pages/register-display-name/register-display-name';
 import { UpdateProfilePage } from '../pages/update-profile/update-profile';
-// import { RegisterPage } from '../pages/register/register';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -68,21 +67,6 @@ export class MyApp {
 					this.photoURL = auth.photoURL;
 				}
 			});
-
-			//track displayName
-		this.afAuth.authState.subscribe(user => {
-			// if (!user.displayName) {
-			// 	this.displayName = null;
-			// 	return;
-			// }
-			// else{
-			// 	this.displayName = user.displayName;
-			// 	this.userEmail = user.email;
-			// 	this.rootPage = HomePage;
-			// 	return;
-			// }
-			console.log(user);
-		})
 		
 			platform.ready().then(() => {
 			// Okay, so the platform is ready and our plugins are available.

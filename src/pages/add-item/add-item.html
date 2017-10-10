@@ -36,7 +36,7 @@
 
 	</ion-list>
 
-	<ion-list>
+	<!-- <ion-list>
 		<ion-item>
 			<ion-label>Category</ion-label>
 			<ion-select [(ngModel)]="selectedCategory">
@@ -45,20 +45,20 @@
 						[class.selected]="category === selectedCategory" (click)="onSelect(category.name)">{{category.name}}</ion-option>
 				</div>
 
-				<!-- <ion-option value="Inspiration">Inspiration</ion-option>
+				<!- <ion-option value="Inspiration">Inspiration</ion-option>
 				<ion-option value="Personal">Personal</ion-option>
 				<ion-option value="Notes">Notes</ion-option>
 				<ion-option value="Shopping List">Shopping List</ion-option>
-				<ion-option value="To-do">To-do</ion-option> -->
-			</ion-select> -->
+				<ion-option value="To-do">To-do</ion-option> ->
+			</ion-select> 
 			
 		</ion-item>
-	</ion-list>
+	</ion-list> -->
 
-	<ion-buttons end>
-		<button ion-button color="light" (click)="close()">Cancel</button>
-		<button end ion-button color="secondary" (click)="saveItem()">Save</button>
-	</ion-buttons>
+	<ion-footer>
+			<button ion-button full color="primary" (click)="saveItem()">Save</button>
+		<button ion-button full clear (click)="close()">Cancel</button>
+	</ion-footer>
 
 
 </ion-content>

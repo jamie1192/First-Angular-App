@@ -63,24 +63,6 @@ export class HomePage {
 		this.userUID = this.auth.auth.currentUser.uid;
 
 		this.items = afDB.list('/notes/'+this.userUID);
-
-		//#region old code
-		// this.dbItems = afDB.list('/cuisines');
-
-		// this.dataService.getData().then((todos) => {
-
-		// 	if(todos){
-		// 		this.items = JSON.parse(todos);
-		// 		this.filterArr = this.items;
-		// 		// this.filterArr = JSON.parse(todos);
-		// 		this.spanContent = null;
-		// 	}
-		// 	else{
-		// 		this.spanContent = 'Nothing here yet!';
-		// 	}
-		// 	// console.log(this.items.length+' length');
-		// })
-		//#endregion
 	}
 
 
@@ -92,30 +74,6 @@ export class HomePage {
 		if(!this.items) {
 			this.spanContent = "Nothing here yet!";
 		}
-		//#region old code
-		// this.dataService.getData().then((todos) => {
-			
-		// 	if(todos){
-		// 		this.items = JSON.parse(todos);
-		// 		this.spanContent = null;
-		// 	}
-		// 	else{
-		// 		this.spanContent = 'Nothing here yet!';
-		// 	}
-		// 	if (this.items.length == 0) {
-				
-		// 		this.spanContent = 'Nothing here yet!';
-		// 	}
-		// 	// else if (this.items.length != 0) {
-		// 	// 	this.spanContent = null;
-		// 	// }
-		// 	// console.log(this.items.length+' length');
-		// })
-		
-		// this.userUID = this.auth.auth.currentUser.uid;
-		// console.log("UID: " +this.userUID)
-
-		//#endregion
 	}
 
 
@@ -133,44 +91,17 @@ export class HomePage {
 	}
 
 	saveItem(item){
-		//#region old code 
-		//repopulate this.items incase it was spliced from filtering
-		// this.dataService.getData().then((todos) => {
-		// 	if(todos){
-		// 		this.items = JSON.parse(todos);
-		// 		// this.filterArr = this.items;
-		// 		this.spanContent = null;
-				
-		// 		console.log(item.title + ' name log test FIREBASE');
-		// 		//save added note
-		// 		this.items.push(item);
-		// 		this.dataService.save(this.items);
-		// 		this.spanContent = null;
-//#endregion
-		// 		//firebase testing
+		
 		// 		// save() {
 				this.afDB.database.ref('notes/'+this.userUID).push().set({
 					title: item.title,
 					description: item.description,
-					category: item.category,
+					// category: item.category,
 					author: item.author
 				});
 				// } end save
 			}
-			//#region  more old code
-			// else{
-			// 	this.spanContent = 'Nothing here yet!';
-			// 	this.items.push(item);
-			// 	this.dataService.save(this.items);
-			// 	this.spanContent = null;
-			// }
-			// console.log(this.items.length+' length');
-	// 	})
-		
-		
-	// }
-	//#endregion
-
+			
 	viewItem(item) {
 		this.navCtrl.push(ItemDetailPage, {
 			item: item
