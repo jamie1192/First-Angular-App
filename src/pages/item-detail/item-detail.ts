@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
-
+import { HomePage } from '../../pages/home/home';
 /**
  * Generated class for the ItemDetailPage page.
  *
@@ -57,7 +57,6 @@ export class ItemDetailPage {
 			position: 'bottom'
 		});
 		toast.present();
-
 	}
 
 }

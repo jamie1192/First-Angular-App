@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, MenuController } from 'ionic-angular';
 import { AlertController, LoadingController } from 'ionic-angular';
 
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -32,6 +32,7 @@ export class RegisterPage {
 		private alertCtrl: AlertController,
 		public toastCtrl: ToastController,
 		public loadingCtrl: LoadingController,
+		public menuCtrl: MenuController,
 		private afAuth: AngularFireAuth) {
 		this.registerData.email = this.navParams.get('email');
 	}
@@ -67,7 +68,7 @@ export class RegisterPage {
 				position: 'bottom'
 			});
 			toast.present();
-
+			this.menuCtrl.enable(true);
 			this.navCtrl.push(RegisterDisplayNamePage);
 		})
 		.catch(err => {
